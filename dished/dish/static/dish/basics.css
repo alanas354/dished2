@@ -1,0 +1,240 @@
+.roboto{
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.green_text {
+    color: #548c2f;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.cardHolder {
+    height: 55%;
+    overflow: hidden;
+    max-height: 400px;
+    min-height: 345px;
+}
+
+
+.card-img-top {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+}
+
+.center {
+    margin: auto;
+}
+
+
+.off_white {
+    background-color: #f4f3ee;
+}
+
+#intro {
+    height: 175px;
+}
+
+/*#form_row {*/
+/*    width: 100%;*/
+/*}*/
+
+.vertical {
+    flex-direction: column;
+}
+
+.btn-link {
+    padding: 0;
+}
+
+.btn-link {
+    color: #548c2f;
+    border: black solid;
+    border-radius: 10px;
+    text-align: center;
+    /*position: relative;*/
+    /*left: 50px;*/
+}
+
+
+.circle {
+    color: black;
+    width: 100%;
+    /*height: 150px;*/
+    aspect-ratio: 1/1;
+    border: #548c2f solid;
+    border-radius: 50%;
+    text-align: center;
+    /*position: relative;*/
+    /*left: 50px;*/
+}
+
+#generate {
+    border: #f4f3ee;
+}
+
+.greenBorder {
+    border: #548c2f solid;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.greenBorder2 {
+    border: #548c2f solid;
+    border-radius: 25px;
+    /*overflow: hidden;*/
+}
+
+.hide_overflow {
+     overflow: hidden;
+
+}
+
+.beige_formatted {
+    /*border: #f4f3ee solid;*/
+    /*border-radius: 25px;*/
+    background-color: #f4f3ee;
+    border-radius: 25px;
+    border: #f4f3ee solid 2px;
+    padding: 30px;
+    margin: auto;
+    height: 100%;
+}
+
+.white_formatted {
+    /*border: #f4f3ee solid;*/
+    /*border-radius: 25px;*/
+    background-color: #f4f3ee;
+    border-radius: 25px;
+    border: white solid 2px;
+    padding: 30px;
+    margin: auto;
+    height: 100%;
+}
+
+
+a:link {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+/*.navbar-btn a:hover {*/
+/*    color*/
+/*    !*color: #f4f3ee;*!*/
+/*    !*background-color: #548c2f !important;*!*/
+/*}*/
+
+.oneRemRight{
+    margin-right: 1rem
+}
+
+.oneRemLeft{
+    margin-left: 1rem
+}
+
+.iconColor:hover {
+    color: #548c2f;
+}
+
+
+.greenHover:hover{
+    color: #548c2f;
+}
+
+.circleHover:hover {
+    border: #548c2f solid;
+    /*border-radius: 75px;*/
+}
+
+.btn-outline-success{
+    background-color: #f4f3ee;
+    outline-color:#548c2f !important;
+}
+.btn-outline-success:hover{
+    background-color: #548c2f;
+}
+
+
+.nav-link{
+   float: right;
+}
+
+
+.like_form {
+    text-align: center;
+    justify-content: center;
+}
+
+.idea_form .col-6{
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+}
+
+select, #id_search {
+    width: 100%;
+    padding: 0;
+}
+
+/*.dropdown2 {*/
+/*    width: 100px;*/
+/*}*/
+
+.white_bg {
+    background-color: white;
+}
+
+.makeRound {
+    border-radius: 25px;
+}
+
+#home_body {
+    background-color: #f4f3ee;
+}
+
+.green_bg {
+    background-color: #548c2f;
+}
+
+/*h3.card-text {*/
+/*    font-size: 1.5em;*/
+/*}*/
+
+/*.card {*/
+/*    container: card / size;*/
+/*}*/
+
+/*.card__inner {*/
+/*    font-size: 5cqw;*/
+/*}*/
+
+/*h3 {*/
+/*  font-size: 1em;*/
+/*  container-name: sidebar*/
+/*}*/
+
+/*@container sidebar (min-width: 1px) {*/
+/*  h3 {*/
+/*    font-size: 2em;*/
+/*  }*/
+/*}*/
+
+/*html {*/
+/*    height*/
+/*}*/

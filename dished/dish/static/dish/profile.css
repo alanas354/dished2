@@ -1,0 +1,23 @@
+@import "basics.css"; /* Using a string */
+
+#ideas {
+    height:60vw;
+}
+
+.cardHolder {
+    height: 100%;
+    overflow: hidden;
+    /*max-height: 400px;*/
+    min-height: 345px;
+}
+
+.cardHolder {
+    height: 55%;
+    overflow: hidden;
+    max-height: 400px;
+}
+
+.like_recipe{
+    text-align: right;
+    justify-content: right;
+}

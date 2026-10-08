@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"-->
+<!--          rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"-->
+<!--          crossorigin="anonymous">-->
+<!--    <link rel="preconnect" href="https://fonts.googleapis.com">-->
+<!--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">-->
+
+<!--    <script src="https://kit.fontawesome.com/05e9ca1b96.js" crossorigin="anonymous"></script>-->
+<!--    {% load static %}-->
+<!--    <link rel="stylesheet" href="{% static 'dish/challenge.css' %}">-->
+<!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--    &lt;!&ndash;    <link rel="stylesheet" href="{% static 'dish/basics.css' %}">&ndash;&gt;-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"-->
+<!--        crossorigin="anonymous"></script>-->
+
+<!--    &lt;!&ndash;    <link rel="stylesheet" href="{% static 'dish/basics.css' %}">&ndash;&gt;-->
+<!--    <title>logout</title>-->
+<!--</head>-->
+<!--<body class="roboto">-->
+<!--   <br>-->
+<!--&lt;!&ndash;   <div class="alert alert-success" role="alert">&ndash;&gt;-->
+<!--&lt;!&ndash;       <h2 style="text-align: center;">You have logged out.</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;   </div>&ndash;&gt;-->
+
+   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+          crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/05e9ca1b96.js" crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dish/challenge.css' %}">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--    <link rel="stylesheet" href="{% static 'dish/basics.css' %}">-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <title>Logged out</title>
+</head>
+<body class="roboto off_white">
+<section class="off_white">
+    <div id="nav" class="oneRemRight">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <a class="navbar-brand oneRemLeft" href="/"><i class="fa-solid fa-drumstick-bite fa-xl"></i>Dished</a>
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto ">
+                        <li class="nav-item navbar-btn hide_overflow ">
+                            <a class="nav-link"  href="/">Dished</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/challenge">Ingredient Challenge</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" id="fml"
+                               aria-expanded="false">
+                                Submit a Recipe
+                            </a>
+                            <ul class="dropdown-menu " aria-labelledby="fml" >
+                                <li><a class="dropdown-item" href="/submitdish">Your Recipe</a></li>
+                                <li ><a class="dropdown-item" href="/submitlink">An Outside Recipe</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item navbar-btn">
+                        <a class="nav-link" href="/aboutus">About Us</a>
+                    </li>
+                        <li class="nav-item navbar-btn">
+                            {% if user.is_authenticated %}
+                            <a class="nav-link" href="/profile"><i class="fa-solid fa-user fa-xl"></i></a>
+                            {% else %}
+                            <a class="nav-link" href="/login"><i class="fa-solid fa-user fa-xl"></i></a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+
+        </nav>
+    </div>
+</section>
+<div class="align-self-end topMargin">
+    <h1 class="green_text centerText display-1 pb-3">
+        <i class="fa-solid fa-check"></i>
+        <br>Logged out.<br>
+<!--        <small class="green_text centerText display-6">Our origins and mission</small>-->
+    </h1>
+    <div class="row m-3 ">
+        <div class="col-2"></div>
+
+        <div class="col ">
+
+
+        </div>
+
+        <div class="col-2"></div>
+
+        <div class="center">
+
+   <h4>Login again?</h4>
+   <a href="{% url 'login' %}" class="btn btn-outline-success">Login</a>
+      <br>
+      <br>
+      <h4>Return Home</h4>
+   <a href="{% url 'home' %}" class="btn btn-outline-success">Home</a>
+   </div>
+
+</div>
+</div>
+
+
+</body>
+</html>

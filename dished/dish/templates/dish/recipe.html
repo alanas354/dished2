@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+          crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/05e9ca1b96.js" crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dish/basics.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--    <link rel="stylesheet" href="{% static 'dish/basics.css' %}">-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
+    <!--    <link rel="script" href="{% static 'dish/submit.js' %}">-->
+    <!--    <script src="js/whatwedo/whatWeDo.js" defer></script>-->
+    <title>Dished</title>
+</head>
+<body class="off_white">
+<section class="off_white" style="margin-bottom: 5%">
+    <div id="nav" class="oneRemRight">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <a class="navbar-brand oneRemLeft" href="/"><i class="fa-solid fa-drumstick-bite fa-xl"></i>Dished</a>
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto ">
+                    <li class="nav-item navbar-btn hide_overflow ">
+                        <a class="nav-link" href="/">Dished</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/challenge">Ingredient Challenge</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" id="fml"
+                           aria-expanded="false">
+                            Submit a Recipe
+                        </a>
+                        <ul class="dropdown-menu " aria-labelledby="fml">
+                            <li><a class="dropdown-item" href="/submitdish">Your Recipe</a></li>
+                            <li><a class="dropdown-item" href="/submitlink">An Outside Recipe</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item navbar-btn">
+                        <a class="nav-link" href="/aboutus">About Us</a>
+                    </li>
+                    <li class="nav-item navbar-btn">
+                        {% if user.is_authenticated %}
+                        <a class="nav-link" href="/profile"><i class="fa-solid fa-user fa-xl"></i></a>
+                        {% else %}
+                        <a class="nav-link" href="/login"><i class="fa-solid fa-user fa-xl"></i></a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+</section>
+<!--<h1> {{recipe.name}}</h1>-->
+<div class="row m-3">
+    <div class="col-lg-6 col-md-12 ">
+        <!--        <div class=" h-100 off_white ">-->
+        <img src={{ recipe.pic }} class="mx-auto d-block " alt="..." style="height: 500px; width:500px;object-fit: cover;border-radius:50% 50% 50% 50% / 50% 50% 50% 50%
+">
+    </div>
+
+    <div class="col-lg-6 col-md-12 justify-content-center">
+        <br>
+        <h1 class=" centerText center text-uppercase">{{ recipe.name }}</h1>
+        <p class="centerText">{{ recipe.cuisine}} {{ recipe.meal_category}}
+
+            |
+            {% if recipe.time == 0%}
+            Less than 30 minutes
+
+            {% elif recipe.time == 1%}
+            Between 30-60 minutes
+
+            {% elif recipe.time == 2%}
+            1 hour +
+            {% endif %}
+            <!--            <br>-->
+            {% if recipe.challenge %}
+            |
+            <i class="fa-solid fa-dice"></i>
+            {% endif %}
+            |
+            <small>
+                {% if recipe.vegan %}
+                <i class="fa-solid fa-seedling text-center"></i>
+                {% endif %}
+
+                {% if recipe.vegetarian %}
+                <i class="fa-solid fa-carrot text-center"></i>
+                {% endif %}
+
+                {% if recipe.few %}
+                <i class="fa-solid fa-5 text-center"></i>
+                {% endif %}
+            </small>
+        </p>
+
+        <br>
+        <br>
+
+
+        <div class="row mx-5 white_bg makeRound p-3">
+
+            <div class="col centerText ">
+
+                <h2 class="green_text">Ingredients:</h2>
+
+                <div class=" row row-cols-1 center">
+                    {% for i in ingredients %}
+                    <div class="col ">
+                        <h5 class="pl-5">
+
+                            {{i.ingredient}}
+                            {% if i.challenge %}
+                            <i class="fa-solid fa-dice"></i>
+                            {% endif %}
+                        </h5>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col">
+                <h2 class="green_text">Directions:</h2>
+
+                {% if recipe.step1 != "" and recipe.step1 != "None"%}
+                <h5 class="pl-4">1. {{ recipe.step1}}</h5>
+                {% endif %}
+
+
+                {% if recipe.step2 != "" and recipe.step2 != "None"%}
+                <h5 class="">2. {{ recipe.step2}}</h5>
+                {% endif %}
+
+                {% if recipe.step3 != "" and recipe.step3 != "None"%}
+                <h5 class="">3. {{ recipe.step3}}</h5>
+                {% endif %}
+
+                {% if recipe.step4 != "" and recipe.step4 != "None"%}
+                <h5 class="">4. {{ recipe.step4}}</h5>
+                {% endif %}
+
+                {% if recipe.step5 != "" and recipe.step5 != "None"%}
+                <h5 class="">5. {{ recipe.step5}}</h5>
+                {% endif %}
+
+                {% if recipe.step6 != "" and recipe.step6 != "None"%}
+                <h5 class="">6. {{ recipe.step6}}</h5>
+                {% endif %}
+
+                {% if recipe.step7 != "" and recipe.step7 != "None"%}
+                <h5 class="">7. {{ recipe.step7}}</h5>
+                {% endif %}
+
+                {% if recipe.step8 != "" and recipe.step8 != "None"%}
+                <h5 class="">8. {{ recipe.step8}}</h5>
+                {% endif %}
+
+                {% if recipe.step9 != "" and recipe.step9 != "None"%}
+                <h5 class="">9. {{ recipe.step9}}</h5>
+                {% endif %}
+
+                {% if recipe.step10 != "" and recipe.step10 != "None"%}
+                <h5 class="">10. {{ recipe.step10}}</h5>
+                {% endif %}
+            </div>
+            <div class="row centerText">
+            {% if user.is_authenticated %}
+            {% if liked %}
+            <form action="{% url 'recipe_like' recipe.id %}" class=" " method="POST">
+                {% csrf_token %}
+                <button type="submit" name="recipe_id" value="{{recipe.id}}" class="btn "><i
+                        class="fa-regular fa-thumbs-up fa-2x green_text"></i></button>
+            </form>
+            {% else %}
+            <form action="{% url 'recipe_like' recipe.id %}" class="" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="recipe_id" value="{{recipe.id}}" class="btn "><i
+                        class="fa-regular fa-thumbs-up fa-2x"></i></button>
+            </form>
+            {% endif %}
+            {% endif %}
+        </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

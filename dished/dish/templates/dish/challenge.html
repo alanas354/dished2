@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+          crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/05e9ca1b96.js" crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dish/challenge.css' %}">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--    <link rel="stylesheet" href="{% static 'dish/basics.css' %}">-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <title>challenge</title>
+</head>
+<body class="roboto">
+<section id="intro" class="off_white">
+    <div id="nav" class="oneRemRight">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <a class="navbar-brand oneRemLeft" href="/"><i class="fa-solid fa-drumstick-bite fa-xl"></i>Dished</a>
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto ">
+                        <li class="nav-item navbar-btn hide_overflow ">
+                            <a class="nav-link"  href="/">Dished</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/challenge">Ingredient Challenge</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" id="fml"
+                               aria-expanded="false">
+                                Submit a Recipe
+                            </a>
+                            <ul class="dropdown-menu " aria-labelledby="fml" >
+                                <li><a class="dropdown-item" href="/submitdish">Your Recipe</a></li>
+                                <li ><a class="dropdown-item" href="/submitlink">An Outside Recipe</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item navbar-btn">
+                        <a class="nav-link" href="/aboutus">About Us</a>
+                    </li>
+                        <li class="nav-item navbar-btn">
+                            {% if user.is_authenticated %}
+                            <a class="nav-link" href="/profile"><i class="fa-solid fa-user fa-xl"></i></a>
+                            {% else %}
+                            <a class="nav-link" href="/login"><i class="fa-solid fa-user fa-xl"></i></a>
+                            {% endif %}
+                        </li>
+                        <li class="nav-item navbar-btn">
+                            {% if user.is_authenticated %}
+                             <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+
+        </nav>
+    </div>
+</section>
+<div class="align-self-end pb-3 off_white">
+    <h1 class="green_text center display-1 pb-3">
+        <i class="fa-solid fa-utensils"></i>
+        <br>Dished Ingredient Challenge<br>
+        <small class="green_text center display-6">Test your culinary skills here.</small>
+    </h1>
+
+</div>
+<!--<div class=" col-lg-12" >-->
+<div class="row m-3 ">
+    <div class="col-lg-5  off_white px-3 makeRound pb-3">
+        <h1 class="center pt-3 mb-4 mt-2"><i class="fa-solid fa-users"></i></h1>
+        <div id="browseOrSubmit">
+            <div class="center">
+                <div class="btn-group-vertical">
+                      <a href="/userRecipes" class=" center btn btn-outline-success mb-3 py-3 text-wrap "><h4> Browse challenger recipes </h4></a>
+                    <a href="/submitdish" class=" center btn btn-outline-success mb-3 py-3 text-wrap"><h4>Submit a recipe</h4></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col  ">
+        <div class="row makeRound">
+            <div class="col oneRemLeft off_white px-3 makeRound" >
+                <a href="/randomingredient" class="generate" >
+
+                <h1 class="center pt-3"><i class="iconColor mt-2 mb-3 fa-solid fa-dice-five"></i></h1>
+                <h2 class="center mb-5" >Random</h2>
+                <p class="center text-wrap" >Click here for AI generated completely random ingredients</p> <br><br><br>
+                <br><br></a>
+            </div>
+            <div class="col oneRemLeft off_white px-3 makeRound">
+                <a href="/commoningredient" class="generate" >
+                <h1 class="center pt-3"><i class="iconColor mt-2 mb-3 fa-solid fa-bolt"></i></h1>
+                <h2 class="center mb-5" >Practical</h2>
+                <p class="center text-wrap" >Click for AI generated commonly found ingredients</p><br><br><br>
+                    <br><br></a>
+            </div>
+            <div class="col off_white px-3 oneRemLeft makeRound">
+                <a href="/seasoningingredient" class="generate" >
+                <h1 class="center pt-3"><i class="iconColor mt-2 mb-3 fa-solid fa-lightbulb"></i></h1>
+                <h2 class="center mb-5" >Seasoning</h2>
+                <p class="center text-wrap" >Click for AI generated seasonings not usually found together </p><br><br><br>
+                    <br><br>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!--</div>-->
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+          crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/05e9ca1b96.js" crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dish/challenge.css' %}">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--    <link rel="stylesheet" href="{% static 'dish/basics.css' %}">-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+    <!--    <link rel="stylesheet" href="{% static 'dish/basics.css' %}">-->
+    <title>seasoning challenge</title>
+</head>
+<body class="roboto" style="background-color: #f4f3ee">
+<section id="intro_ingredient" class="off_white">
+        <div id="nav" class="oneRemRight">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <a class="navbar-brand oneRemLeft" href="/"><i class="fa-solid fa-drumstick-bite fa-xl"></i>Dished</a>
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto ">
+                        <li class="nav-item navbar-btn hide_overflow ">
+                            <a class="nav-link"  href="/">Dished</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/challenge">Ingredient Challenge</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" id="fml"
+                               aria-expanded="false">
+                                Submit a Recipe
+                            </a>
+                            <ul class="dropdown-menu " aria-labelledby="fml" >
+                                <li><a class="dropdown-item" href="/submitdish">Your Recipe</a></li>
+                                <li ><a class="dropdown-item" href="/submitlink">An Outside Recipe</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item navbar-btn">
+                        <a class="nav-link" href="/aboutus">About Us</a>
+                    </li>
+                        <li class="nav-item navbar-btn">
+                            {% if user.is_authenticated %}
+                            <a class="nav-link" href="/profile"><i class="fa-solid fa-user fa-xl"></i></a>
+                            {% else %}
+                            <a class="nav-link" href="/login"><i class="fa-solid fa-user fa-xl"></i></a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+
+        </nav>
+    </div>
+</section>
+<div class="align-self-end pb-3 off_white">
+<!--    <h1 class="green_text center display-1 pb-3">-->
+<!--        <i class="fa-solid fa-robot"></i> <i class="fa-solid fa-right-long"></i> <i class="iconColor mt-2 mb-3 fa-solid fa-lightbulb"></i>-->
+<!--        <br>Your AI ingredient challenge<br>-->
+<!--        <small class="green_text center display-6"> <br>-->
+<!--            <h1>Ingredient 1: {{ i1 }}</h1>-->
+<!--            <h1>Ingredients 2: {{ i2 }}</h1>-->
+<!--            <h1>Ingredients 3: {{ i3 }}</h1>-->
+<!--        </small>-->
+<!--    </h1>-->
+    <h1 class="green_text center display-1 pb-3">
+        <i class="fa-solid fa-robot"></i> <i class="fa-solid fa-right-long"></i> <i class="iconColor mt-2 mb-3 fa-solid fa-lightbulb"></i>
+        <br>Your AI ingredient challenge<br>
+        <div class="container center topMargin green_text" >
+
+            <div class="row green_text center display-6"> <br>
+
+                <div class="col">
+                    <div class="card mb-3" style="max-width: 18rem;">
+                          <div class="card-header">1</div>
+                          <div class="card-body">
+                                <h5 class="card-title text-uppercase">{{ i1 }}</h5>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card mb-3" style="max-width: 18rem;">
+                          <div class="card-header">2</div>
+                          <div class="card-body">
+                                <h5 class="card-title text-uppercase">{{ i2 }}</h5>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card mb-3" style="max-width: 18rem;">
+                          <div class="card-header">3</div>
+                          <div class="card-body">
+                                <h5 class="card-title text-uppercase">{{ i3 }}</h5>
+                          </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </h1>
+
+</div>
+
+
+
+
+
+
+
+</body>
+</html>

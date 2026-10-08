@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" class="off_white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+          crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/05e9ca1b96.js" crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dish/challenge.css' %}">
+    <script src="{% static 'dish/home.js' %}" defer ></script>
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--    <link rel="stylesheet" href="{% static 'dish/basics.css' %}">-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+
+    <title>Browse user recipes</title>
+</head>
+
+<body class="roboto center">
+<section id="intro" class="off_white " style="display: block">
+    <div id="nav" class="oneRemRight">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <a class="navbar-brand oneRemLeft" href="/"><i class="fa-solid fa-drumstick-bite fa-xl"></i>Dished</a>
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto ">
+                        <li class="nav-item navbar-btn hide_overflow ">
+                            <a class="nav-link"  href="/">Dished</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/challenge">Ingredient Challenge</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" id="fml"
+                               aria-expanded="false">
+                                Submit a Recipe
+                            </a>
+                            <ul class="dropdown-menu " aria-labelledby="fml" >
+                                <li><a class="dropdown-item" href="/submitdish">Your Recipe</a></li>
+                                <li ><a class="dropdown-item" href="/submitlink">An Outside Recipe</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item navbar-btn">
+                        <a class="nav-link" href="/aboutus">About Us</a>
+                    </li>
+                        <li class="nav-item navbar-btn">
+                            {% if user.is_authenticated %}
+                            <a class="nav-link" href="/profile"><i class="fa-solid fa-user fa-xl"></i></a>
+
+                            {% else %}
+                            <a class="nav-link" href="/login"><i class="fa-solid fa-user fa-xl"></i></a>
+                            {% endif %}
+                        </li>
+                        <li class="nav-item navbar-btn">
+                            {% if user.is_authenticated %}
+                             <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+
+        </nav>
+
+<div class="align-self-end pb-3 off_white center green_text topMargin">
+    <h1 class=" center display-1 pb-2">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <br>Browse challenger creations.<br>
+    </h1>
+</div>
+<br>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4  mt-3 overflow-scroll beige_formatted" id="ideas">
+    {% for recipe in liked_recipes %}
+    <div class="col cardHolder mb-3">
+        <div class="card h-100 off_white ">
+            <a href="{% url 'recipe' recipe.id %}">
+                <img src={{ recipe.pic }} class="card-img-top " alt="...">
+                <div class="card-body center centerText verticalCenter greenHover">
+                    <h3 class="card-text recipe_card">{{ recipe.name }}</h3>
+                </div>
+            </a>
+            {% if user.is_authenticated %}
+            <form action="{% url 'userRecipes_like' recipe.id %}" class="like_form" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="recipe_id" value="{{recipe.id}}" class="btn"><i
+                        class="fa-regular fa-thumbs-up fa-2x green_text"></i></button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    {% for recipe in unliked_recipes %}
+    <div class="col cardHolder mb-3">
+        <div class="card h-100 off_white ">
+            <a href="{% url 'recipe' recipe.id %}">
+                <img src={{ recipe.pic }} class="card-img-top " alt="...">
+                <div class="card-body center centerText verticalCenter greenHover">
+                    <h3 class="card-text recipe_card">{{ recipe.name }}</h3>
+                </div>
+            </a>
+            {% if user.is_authenticated %}
+            <form action="{% url 'userRecipes_like' recipe.id %}" class="like_form" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="recipe_id" value="{{recipe.id}}" class="btn"><i
+                        class="fa-regular fa-thumbs-up fa-2x"></i></button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!--<div class="container center " >-->
+<!--    <div class="row">-->
+<!--        <div class="card col mx-1 " style="width: 18rem;" >-->
+<!--            <div class="card-body d-flex flex-column ">-->
+<!--&lt;!&ndash;            creates description "table" &ndash;&gt;-->
+<!--                <div class="card-header">Dish name</div>-->
+<!--                <br>-->
+<!--                <p class="card-text">Description of dish</p>-->
+<!--            </div>-->
+
+<!--            <div class="btn-group d-flex green_text" role="group" aria-label="myButtons">-->
+<!--                <button type="button" class="align-self-end btn w-100 likeButton"><i class="fa-solid fa-thumbs-up"></i></button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="card col mx-1 " style="width: 18rem;" >-->
+<!--            <div class="card-body d-flex flex-column ">-->
+<!--&lt;!&ndash;            creates description "table" &ndash;&gt;-->
+<!--                <div class="card-header">Dish name</div>-->
+<!--                <br>-->
+<!--                <p class="card-text">Description of dish</p>-->
+<!--            </div>-->
+
+<!--            <div class="btn-group d-flex green_text" role="group" aria-label="myButtons">-->
+<!--                <button type="button" class="align-self-end btn w-100 likeButton"><i class="fa-solid fa-thumbs-up"></i></button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="card col mx-1 " style="width: 18rem;" >-->
+<!--            <div class="card-body d-flex flex-column ">-->
+<!--&lt;!&ndash;            creates description "table" &ndash;&gt;-->
+<!--                <div class="card-header">Dish name</div>-->
+<!--                <br>-->
+<!--                <p class="card-text">Description of dish</p>-->
+<!--            </div>-->
+
+<!--            <div class="btn-group d-flex green_text" role="group" aria-label="myButtons">-->
+<!--                <button type="button" class="align-self-end btn w-100 likeButton"><i class="fa-solid fa-thumbs-up"></i></button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
+    </div>
+</section>
+
+
+</body>
+</html>

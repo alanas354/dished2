@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+          crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/05e9ca1b96.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dish/challenge.css' %}">
+    <script src="{% static 'dish/submit.js' %}" defer ></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--    <link rel="stylesheet" href="{% static 'dish/basics.css' %}">-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
+
+    <title>Submit a dish</title>
+</head>
+<body class="roboto off-white" id="home_body">
+<section id="intro">
+    <div id="nav" class="oneRemRight">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <a class="navbar-brand oneRemLeft" href="/"><i class="fa-solid fa-drumstick-bite fa-xl"></i>Dished</a>
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto ">
+                    <li class="nav-item navbar-btn hide_overflow ">
+                        <a class="nav-link" href="/">Dished</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/challenge">Ingredient Challenge</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" id="fml"
+                           aria-expanded="false">
+                            Submit a Recipe
+                        </a>
+                        <ul class="dropdown-menu " aria-labelledby="fml">
+                            <li><a class="dropdown-item" href="/submitdish">Your Recipe</a></li>
+                            <li><a class="dropdown-item" href="/submitlink">An Outside Recipe</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item navbar-btn">
+                        <a class="nav-link" href="/aboutus">About Us</a>
+                    </li>
+                    <li class="nav-item navbar-btn">
+                        {% if user.is_authenticated %}
+                        <a class="nav-link" href="/profile"><i class="fa-solid fa-user fa-xl"></i></a>
+                        {% else %}
+                        <a class="nav-link" href="/login"><i class="fa-solid fa-user fa-xl"></i></a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+</section>
+<div class="align-self-end pb-3 center green_text">
+    <h1 class=" center display-1 pb-2">
+        <i class="fa-regular fa-circle-check"></i>
+        <br>Congratulations chef.<br>
+    </h1>
+</div>
+<br>
+<br>
+
+<div class="row mx-5 my-3">
+    <div class="col-6 makeRound white_bg p-4">
+
+        <form class="row g-3" action="" method="POST">
+
+            {% csrf_token %}
+            {% if form.errors %}
+<!--            <small style="color: red">{{ form.non_field_errors }} </small>-->
+                    {% for error in form.non_field_errors %}
+                        <small style="color: red">{{ error }} </small>
+                    {% endfor %}
+            {% endif %}
+            <div class="col-12">
+                <label>Recipe Name: </label>
+                {{ form.name }}
+                {% for error in form.name.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class=" col-12">
+                <label>{{ form.pic.label }}: </label>
+                {{ form.pic }}
+                {% for error in form.pic.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="col-4 ps-0">
+                <label>{{ form.cuisine.label }}</label>
+                {{ form.cuisine }}
+                {% for error in form.cuisine.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class=" col-4">
+                <label>{{ form.time.label }}: </label>
+                {{ form.time }}
+                {% for error in form.time.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="col-4 pe-0">
+                <label>{{ form.meal_category.label }}: </label>
+                {{ form.meal_category }}
+                {% for error in form.meal_category.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="col-3">
+                <label>Minimal Ingredients</label>
+                {{ form.few }}
+                {% for error in form.few.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="col-3">
+                <label>{{ form.vegan.label }}: </label>
+                {{ form.vegan }}
+                {% for error in form.vegan.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="col-3">
+                <label>{{ form.vegetarian.label }}: </label>
+                {{ form.vegetarian }}
+                {% for error in form.vegetarian.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="col-3">
+                <label>{{ form.challenge.label }}: </label>
+                {{ form.challenge}}
+                {% for error in form.challenge.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <h3 class=green_text>Ingredients</h3>
+            <!--            <div id="ingredients">-->
+            <div class="offset-4 col-2 hide"><p class="small_text">Challenge</p></div>
+            <div class="offset-4 col-2 hide"><p class="small_text">Challenge</p></div>
+            <div class="ingredient col-md-6 mt-1">
+                <div class="row form-group">
+                    <div class="col-10">
+                        {{ form.ingredient1 }}
+                        {% for error in form.ingredient1.errors %}
+                        <small style="color: red">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-2 hide">
+                        {{ form.challenge1 }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="ingredient col-md-6 mt-1">
+                <div class="row form-group">
+                    <div class="col-10">
+                        {{ form.ingredient2 }}
+                    </div>
+                    <div class="col-2 hide">
+                        {{ form.challenge2 }}
+                    </div>
+                </div>
+            </div>
+            <div class="ingredient col-md-6">
+                <div class="row form-group">
+                    <div class="col-10">
+                        {{ form.ingredient3 }}
+                    </div>
+                    <div class="col-2 hide">
+                        {{ form.challenge3 }}
+                    </div>
+                </div>
+            </div>
+            <div class="ingredient col-md-6">
+                <div class="row form-group">
+                    <div class="col-10">
+                        {{ form.ingredient4 }}
+                    </div>
+                    <div class="col-2 hide">
+                        {{ form.challenge4 }}
+                    </div>
+                </div>
+            </div>
+            <div class="ingredient col-md-6">
+                <div class="row form-group">
+                    <div class="col-10">
+                        {{ form.ingredient5 }}
+                    </div>
+                    <div class="col-2 hide">
+                        {{ form.challenge5 }}
+                    </div>
+                </div>
+            </div>
+            <div class="ingredient col-md-6">
+                <div class="row form-group">
+                    <div class="col-10">
+                        {{ form.ingredient6 }}
+                    </div>
+                    <div class="col-2 hide">
+                        {{ form.challenge6 }}
+                    </div>
+                </div>
+            </div>
+            <div class="ingredient col-md-6">
+                <div class="row form-group">
+                    <div class="col-10">
+                        {{ form.ingredient7 }}
+                    </div>
+                    <div class="col-2 hide">
+                        {{ form.challenge7 }}
+                    </div>
+                </div>
+            </div>
+            <div class="ingredient col-md-6">
+                <div class="row form-group">
+                    <div class="col-10">
+                        {{ form.ingredient8 }}
+                    </div>
+                    <div class="col-2 hide">
+                        {{ form.challenge8 }}
+                    </div>
+                </div>
+            </div>
+            <div class="ingredient col-md-6">
+                <div class="row form-group">
+                    <div class="col-10">
+                        {{ form.ingredient9 }}
+                    </div>
+                    <div class="col-2 hide">
+                        {{ form.challenge9 }}
+                    </div>
+                </div>
+            </div>
+            <div class="ingredient col-md-6">
+                <div class="row form-group">
+                    <div class="col-10">
+                        {{ form.ingredient10 }}
+                    </div>
+                    <div class="col-2 hide">
+                        {{ form.challenge10 }}
+                    </div>
+                </div>
+            </div>
+            <h3 class="green_text">Instructions</h3>
+            <div class="form-group row mb-3">
+                <label class="green_text big_text col-form-label col-2">{{ form.step1.label }}: </label>
+                <div class="col-10">
+                    {{ form.step1 }}
+                </div>
+                {% for error in form.step1.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group row mb-3">
+                <label class="green_text big_text col-form-label col-2">{{ form.step2.label }}: </label>
+                <div class="col-10">
+                    {{ form.step2 }}
+                </div>
+                {% for error in form.step2.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group row mb-3">
+                <label class="green_text big_text col-form-label col-2">{{ form.step3.label }}: </label>
+                <div class="col-10">
+                    {{ form.step3 }}
+                </div>
+                {% for error in form.step3.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group row mb-3">
+                <label class="green_text big_text col-form-label col-2">{{ form.step4.label }}: </label>
+                <div class="col-10">
+                    {{ form.step4 }}
+                </div>
+                {% for error in form.step4.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group row mb-3">
+                <label class="green_text big_text col-form-label col-2">{{ form.step5.label }}: </label>
+                <div class="col-10">
+                    {{ form.step5 }}
+                </div>
+                {% for error in form.step5.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group row mb-3">
+                <label class="green_text big_text col-form-label col-2">{{ form.step6.label }}: </label>
+                <div class="col-10">
+                    {{ form.step6 }}
+                </div>
+                {% for error in form.step6.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group row mb-3">
+                <label class="green_text big_text col-form-label col-2">{{ form.step7.label }}: </label>
+                <div class="col-10">
+                    {{ form.step7 }}
+                </div>
+                {% for error in form.step7.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group row mb-3">
+                <label class="green_text big_text col-form-label col-2">{{ form.step8.label }}: </label>
+                <div class="col-10">
+                    {{ form.step8 }}
+                </div>
+                {% for error in form.step8.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group row mb-3">
+                <label class="green_text big_text col-form-label col-2">{{ form.step9.label }}: </label>
+                <div class="col-10">
+                    {{ form.step9 }}
+                </div>
+                {% for error in form.step9.errors %}
+                <small style="color: red">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <!--             <div class="col-12">-->
+            <!--                 <label>{{ form.step10.label }}: </label>-->
+            <!--                 {{ form.step10 }}-->
+            <!--             </div>-->
+
+
+            <!--            {% for field in form %}-->
+            <!--               <div class="loginFields">-->
+            <!--                   <p>{{ field.label }}: <br> {{ field }}</p>-->
+            <!--                   {% for error in field.errors %}-->
+            <!--                       <small style="color: red">{{ error }}</small>-->
+            <!--                   {% endfor %}-->
+            <!--               </div>-->
+            <!--           {% endfor %}-->
+            <div>
+                <button type="submit" class="btn btn-outline-success ">Submit dish</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col align-self-center pb-3 ">
+        <h2 class="green_text center display-3 pb-3">
+
+            <br>Share your creativity.<br>
+            <small class="green_text center display-6">Submit your dish now.</small>
+        </h2>
+
+    </div>
+
+<!--    <div class="col d-flex align-items-start pb-3 ">-->
+<!--        <h2 class="green_text display-3 pb-3 align-text-top" id="text">-->
+
+<!--            <br>Share your creativity.<br>-->
+<!--            <small class="green_text center display-6">Submit your dish now.</small>-->
+<!--        </h2>-->
+
+<!--    </div>-->
+
+</div>
+
+
+</body>
+</html>
